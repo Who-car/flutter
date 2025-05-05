@@ -2,7 +2,7 @@
 
 A new Flutter project :^)
 
-![Demo](https://youtube.com/shorts/OQ8Ty7Zr76w?feature=share)
+[![Demo](https://img.youtube.com/vi/OQ8Ty7Zr76w/maxresdefault.jpg)](https://www.youtube.com/watch?v=OQ8Ty7Zr76w)
 
 ## Getting Started
 
