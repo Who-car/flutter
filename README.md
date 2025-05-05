@@ -2,7 +2,7 @@
 
 A new Flutter project :^)
 
-![Demo](public/Screen_recording.mp4)
+![Demo](https://youtube.com/shorts/OQ8Ty7Zr76w?feature=share)
 
 ## Getting Started
 
