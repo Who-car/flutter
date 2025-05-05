@@ -6,7 +6,16 @@
 *.swp
 .buildlog/
 .history
-
+.idea
+android/app/.cxx/
+macos/
+android/
+ios/
+web/
+macos/
+windows/
+linux/
+test/
 
 
 # Flutter repo-specific
