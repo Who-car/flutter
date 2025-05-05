@@ -2,6 +2,8 @@
 
 A new Flutter project :^)
 
+![Demo](public/Screen_recording.mp4)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
