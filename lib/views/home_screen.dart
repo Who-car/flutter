@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../view_models/cat_view_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dotnet_cw/bloc/cat_bloc.dart';
+import 'package:dotnet_cw/bloc/cat_event.dart';
+import 'package:dotnet_cw/bloc/cat_state.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,7 +16,7 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () => context.read<CatViewModel>().fetchCatImage(),
+              onPressed: () => context.read<CatBloc>().add(const FetchCatImage()),
               child: const Text('Load Cat Image'),
             ),
             ElevatedButton(
@@ -22,18 +24,15 @@ class HomeScreen extends StatelessWidget {
               child: const Text('Go to Pagination'),
             ),
             const SizedBox(height: 20),
-            Consumer<CatViewModel>(
-              builder: (context, vm, child) {
-                if (vm.isLoading) {
-                  return const CircularProgressIndicator();
-                }
-                if (vm.error != null) {
-                  return Text('Error: ${vm.error}');
-                }
-                if (vm.catImage != null) {
-                  return Image.network(vm.catImage!.url, height: 300);
-                }
-                return const Text('Press the button to load a cat image');
+            BlocBuilder<CatBloc, CatState>(
+              builder: (context, state) {
+                return state.when(
+                  normal: (data1, isLoading1, data2, isLoading2) => data1 != null
+                      ? Image.network(data1.url, height: 300)
+                      : const Text('Press the button to load a cat image'),
+                  loading: () => const CircularProgressIndicator(),
+                  error: (message) => Text('Error: $message'),
+                );
               },
             ),
           ],

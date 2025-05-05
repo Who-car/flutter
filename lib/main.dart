@@ -1,21 +1,25 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dotnet_cw/bloc/cat_bloc.dart';
+import 'package:dotnet_cw/bloc/cat_event.dart';
 import 'package:dotnet_cw/repositories/cat_repository.dart';
 import 'package:dotnet_cw/use_cases/fetch_cat_gifs.dart';
 import 'package:dotnet_cw/use_cases/fetch_cat_image.dart';
-import 'package:dotnet_cw/view_models/cat_view_model.dart';
 import 'package:dotnet_cw/views/home_screen.dart';
 import 'package:dotnet_cw/views/pagination_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   final repository = CatRepositoryImpl();
   final fetchCatImageUseCase = FetchCatImageUseCase(repository);
   final fetchCatGifsUseCase = FetchCatGifsUseCase(repository);
-  final viewModel = CatViewModel(fetchCatImageUseCase: fetchCatImageUseCase, fetchCatGifsUseCase: fetchCatGifsUseCase);
+  final catBloc = CatBloc(
+    fetchCatImageUseCase: fetchCatImageUseCase,
+    fetchCatGifsUseCase: fetchCatGifsUseCase,
+  );
 
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => viewModel,
+    BlocProvider(
+      create: (_) => catBloc..add(const CatEvent.initialize()),
       child: const MyApp(),
     ),
   );
