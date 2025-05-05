@@ -1,7 +1,11 @@
-class CatImage {
-  final String url;
-  CatImage({required this.url});
-  factory CatImage.fromJson(Map<String, dynamic> json) {
-    return CatImage(url: json['url']);
-  }
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'cat_image.freezed.dart';
+part 'cat_image.g.dart';
+
+@freezed
+abstract class CatImage with _$CatImage {
+  const factory CatImage({required String url}) = _CatImage;
+
+  factory CatImage.fromJson(Map<String, dynamic> json) => _$CatImageFromJson(json);
 }
